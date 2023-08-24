@@ -1,3 +1,5 @@
+import { toast } from "react-hot-toast";
+
 import { letters } from "../constants/letters";
 import DeleteIcon from "./icons/delete-icon";
 import { useStore } from "../store";
@@ -10,13 +12,14 @@ type ButtonProps = {
 	color: number;
 };
 
+const colorClasses = [
+	"bg-neutral-500",
+	"bg-neutral-700",
+	"bg-yellow-500",
+	"bg-green-600",
+];
+
 const Button = ({ children, onClick, color = 0 }: ButtonProps) => {
-	const colorClasses = [
-		"bg-neutral-500",
-		"bg-neutral-700",
-		"bg-yellow-500",
-		"bg-green-600",
-	];
 	return (
 		<button
 			type="button"
@@ -60,9 +63,11 @@ const Keyboard = () => {
 	const onClickEnter = async () => {
 		if (currentGuess.length === 5) {
 			await refetch();
-			if (guessResult) {
+			if (guessResult?.isVailidGuess) {
 				addGuess(guessResult);
 				resetCurrentGuess();
+			} else {
+				toast("Not in word list", { duration: 500 });
 			}
 		}
 	};

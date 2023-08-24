@@ -3,6 +3,8 @@ import { TRPCError } from "@trpc/server";
 
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
+const WORDS_API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+
 export const wordleRouter = createTRPCRouter({
 	checkGuess: publicProcedure
 		.input(
@@ -12,6 +14,14 @@ export const wordleRouter = createTRPCRouter({
 		)
 		.query(async ({ input }) => {
 			const { guess } = input;
+
+			const { status } = await fetch(`${WORDS_API_URL}${guess}`);
+			if (status !== 200) {
+				return {
+					isVailidGuess: false,
+				};
+			}
+
 			const answer = "beets";
 			const isCorrect = answer === guess;
 
@@ -49,6 +59,7 @@ export const wordleRouter = createTRPCRouter({
 				guess,
 				isCorrect,
 				guessData,
+				isVailidGuess: true,
 			};
 		}),
 });

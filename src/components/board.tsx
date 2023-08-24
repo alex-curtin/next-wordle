@@ -1,5 +1,7 @@
 import { useStore } from "../store";
 
+const colorClasses = ["", "bg-neutral-600", "bg-yellow-500", "bg-green-600"];
+
 const Square = ({
 	letter,
 	colorClass = "",
@@ -23,12 +25,6 @@ const Board = () => {
 					// rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 					<div key={i} className="flex gap-1 mb-1">
 						{guess.guessData.map((ltr, i) => {
-							const colorClasses = [
-								"",
-								"bg-neutral-600",
-								"bg-yellow-500",
-								"bg-green-600",
-							];
 							return (
 								<Square
 									letter={ltr.char}
