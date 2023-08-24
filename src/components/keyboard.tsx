@@ -67,7 +67,7 @@ const Keyboard = () => {
 				addGuess(guessResult);
 				resetCurrentGuess();
 			} else {
-				toast("Not in word list", { duration: 500 });
+				toast("Not in word list", { duration: 1000 });
 			}
 		}
 	};

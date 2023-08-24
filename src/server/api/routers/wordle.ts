@@ -2,6 +2,7 @@ import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 
 import { createTRPCRouter, publicProcedure } from "../trpc";
+import { getWordOfTheDay } from "~/server/utils/getWord";
 
 const WORDS_API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
@@ -22,7 +23,7 @@ export const wordleRouter = createTRPCRouter({
 				};
 			}
 
-			const answer = "beets";
+			const answer = getWordOfTheDay();
 			const isCorrect = answer === guess;
 
 			const tempAnswer = answer.split("");
