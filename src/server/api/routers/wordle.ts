@@ -2,7 +2,7 @@ import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 
 import { createTRPCRouter, publicProcedure } from "../trpc";
-import { getWordOfTheDay } from "~/server/utils/getWord";
+import { getWordOfTheDay } from "~/server/utils/get-word";
 
 const WORDS_API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
