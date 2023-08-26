@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 
 import { letters } from "../constants/letters";
@@ -20,11 +21,14 @@ const colorClasses = [
 ];
 
 const Button = ({ children, onClick, color = 0 }: ButtonProps) => {
+	const { gameIsOver } = useStore();
+
 	return (
 		<button
 			type="button"
 			onClick={onClick}
 			className={`${colorClasses[color]} py-4 px-4 rounded-md`}
+			disabled={gameIsOver}
 		>
 			{children}
 		</button>
@@ -38,15 +42,61 @@ const Keyboard = () => {
 		addLetter,
 		deleteLetter,
 		addGuess,
+		guesses,
+		gameIsOver,
 		letters,
 		resetCurrentGuess,
-	} = useStore((state) => state);
-	const { data: guessResult, refetch } = api.wordle.checkGuess.useQuery(
+		setGameOver,
+	} = useStore();
+	const {
+		data: guessResult,
+		refetch: checkGuess,
+		isRefetching: isCheckingGuess,
+	} = api.wordle.checkGuess.useQuery(
 		{
 			guess: currentGuess.join(""),
 		},
-		{ enabled: currentGuess.length === 5 },
+		{ enabled: false },
 	);
+	const {
+		data: correctAnswer,
+		refetch: fetchAnswer,
+		isRefetching: isFetchingAnswer,
+	} = api.wordle.revealAnswer.useQuery({}, { enabled: false });
+
+	useEffect(() => {
+		if (guessResult) {
+			if (!guessResult.isVailidGuess) {
+				toast("Not in word list", { duration: 1000 });
+				return;
+			}
+
+			addGuess(guessResult);
+			resetCurrentGuess();
+
+			if (guessResult.isCorrect) {
+				setGameOver();
+				toast(
+					`Congratulations, you guessed it in ${guesses.length + 1} turn${
+						guesses.length + 1 === 1 ? "" : "s"
+					}`,
+				);
+			}
+
+			if (guesses.length === 5 && !guessResult.isCorrect) {
+				setGameOver();
+				fetchAnswer();
+			}
+		}
+	}, [guessResult]);
+
+	useEffect(() => {
+		if (correctAnswer) {
+			toast(`The correct answer is ${correctAnswer.answer}!`, {
+				duration: Infinity,
+			});
+		}
+	}, [correctAnswer]);
 
 	const onClickLetter = (ltr: string) => {
 		if (currentGuess.length < 5) {
@@ -62,13 +112,7 @@ const Keyboard = () => {
 
 	const onClickEnter = async () => {
 		if (currentGuess.length === 5) {
-			await refetch();
-			if (guessResult?.isVailidGuess) {
-				addGuess(guessResult);
-				resetCurrentGuess();
-			} else {
-				toast("Not in word list", { duration: 1000 });
-			}
+			checkGuess();
 		}
 	};
 

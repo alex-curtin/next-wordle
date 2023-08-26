@@ -16,16 +16,20 @@ interface Store {
 	guesses: Guess[];
 	currentGuess: string[];
 	letters: { [key: string]: 0 | 1 | 2 | 3 };
+	gameIsOver: boolean;
 	addGuess: (newGuess: Guess) => void;
 	addLetter: (ltr: string) => void;
 	deleteLetter: () => void;
 	resetCurrentGuess: () => void;
+	setGameOver: () => void;
 }
 
 export const useStore = create<Store>((set) => ({
 	guesses: [],
 	currentGuess: [],
 	letters: defaultLetterColors,
+	gameIsOver: false,
+	setGameOver: () => set(() => ({ gameIsOver: true })),
 	addGuess: (newGuess) =>
 		set((state) => {
 			const newLetters = {};

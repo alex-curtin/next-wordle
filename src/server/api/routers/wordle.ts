@@ -63,4 +63,11 @@ export const wordleRouter = createTRPCRouter({
 				isVailidGuess: true,
 			};
 		}),
+
+	revealAnswer: publicProcedure.query(async () => {
+		const answer = getWordOfTheDay();
+		return {
+			answer,
+		};
+	}),
 });
