@@ -27,7 +27,9 @@ export const useStore = create<Store>((set) => ({
 		set((state) => {
 			const newLetters: { [key: string]: number } = {};
 			newGuess.guessData.forEach((c) => {
-				newLetters[c.char] = Math.max(state.letters[c.char], c.color);
+				if (!newLetters[c.char]) {
+					newLetters[c.char] = Math.max(state.letters[c.char], c.color);
+				}
 			});
 
 			return {
