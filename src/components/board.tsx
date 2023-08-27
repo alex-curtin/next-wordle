@@ -43,8 +43,12 @@ const Board = () => {
 				// rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 				<div className="flex gap-1 mb-1" key={i}>
 					{Array.from({ length: 5 }).map((_, j) => (
-						// rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-						<Square key={j} letter={i === 0 ? currentGuess[j] : ""} />
+						<Square
+							// rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+							key={j}
+							letter={i === 0 ? currentGuess[j] : ""}
+							colorClass=""
+						/>
 					))}
 				</div>
 			))}
