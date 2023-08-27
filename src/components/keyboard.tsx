@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import { toast } from "react-hot-toast";
 
 import DeleteIcon from "./icons/delete-icon";
@@ -10,6 +10,7 @@ import { api } from "~/utils/api";
 type ButtonProps = {
 	onClick: () => void;
 	color: number;
+	children: ReactNode;
 };
 
 const colorClasses = [
