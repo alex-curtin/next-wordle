@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 
-import { letters } from "../constants/letters";
 import DeleteIcon from "./icons/delete-icon";
 import { useStore } from "../store";
 import { postGuess } from "~/lib/api";
