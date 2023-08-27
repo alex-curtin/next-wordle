@@ -4,7 +4,7 @@ export const letterKeys = [
 	["z", "x", "c", "v", "b", "n", "m"],
 ];
 
-export const defaultLetterColors = {
+export const defaultLetterColors: { [key: string]: number } = {
 	a: 0,
 	b: 0,
 	c: 0,

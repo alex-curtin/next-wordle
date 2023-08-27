@@ -2,13 +2,13 @@ import { create } from "zustand";
 
 import { RouterOutputs } from "~/utils/api";
 import { defaultLetterColors } from "~/constants/letters";
-
+typeof defaultLetterColors;
 type Guess = RouterOutputs["wordle"]["checkGuess"];
 
 interface Store {
 	guesses: Guess[];
 	currentGuess: string[];
-	letters: { [key: string]: 0 | 1 | 2 | 3 };
+	letters: typeof defaultLetterColors;
 	gameIsOver: boolean;
 	addGuess: (newGuess: Guess) => void;
 	addLetter: (ltr: string) => void;
@@ -25,7 +25,7 @@ export const useStore = create<Store>((set) => ({
 	setGameOver: () => set(() => ({ gameIsOver: true })),
 	addGuess: (newGuess) =>
 		set((state) => {
-			const newLetters = {};
+			const newLetters: { [key: string]: number } = {};
 			newGuess.guessData.forEach((c) => {
 				newLetters[c.char] = Math.max(state.letters[c.char], c.color);
 			});
