@@ -14,7 +14,7 @@ export const wordList = [
 	"mouse",
 	"knife",
 	"light",
-	"pruit",
+	"fruit",
 	"paint",
 	"phone",
 	"river",
@@ -29,4 +29,5 @@ export const wordList = [
 	"radio",
 	"smoke",
 	"stage",
+	"trace",
 ];
