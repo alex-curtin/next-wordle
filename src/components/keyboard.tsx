@@ -62,7 +62,7 @@ const Keyboard = () => {
 		data: correctAnswer,
 		refetch: fetchAnswer,
 		isRefetching: isFetchingAnswer,
-	} = api.wordle.revealAnswer.useQuery({}, { enabled: false });
+	} = api.wordle.revealAnswer.useQuery(null, { enabled: false });
 
 	useEffect(() => {
 		if (guessResult) {
