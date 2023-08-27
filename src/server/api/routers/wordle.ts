@@ -67,7 +67,7 @@ export const wordleRouter = createTRPCRouter({
 			};
 		}),
 
-	revealAnswer: publicProcedure.query(async () => {
+	revealAnswer: publicProcedure.input(z.null()).query(async () => {
 		const answer = getWordOfTheDay();
 		return {
 			answer,
