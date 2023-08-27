@@ -9,7 +9,7 @@ import { api } from "~/utils/api";
 
 type ButtonProps = {
 	onClick: () => void;
-	color: number;
+	color?: number;
 	children: ReactNode;
 };
 
