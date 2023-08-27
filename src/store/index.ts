@@ -3,13 +3,6 @@ import { create } from "zustand";
 import { RouterOutputs } from "~/utils/api";
 import { defaultLetterColors } from "~/constants/letters";
 
-const getColor = (data) => {
-	const { inWord, correctPosition } = data;
-	if (correctPosition) return "green";
-	if (inWord) return "yellow";
-	return "black";
-};
-
 type Guess = RouterOutputs["wordle"]["checkGuess"];
 
 interface Store {
