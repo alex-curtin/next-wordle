@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
 
 import { api } from "~/utils/api";
+import "./animation.css";
 
 const App = ({ Component, pageProps }: AppProps) => {
 	return (

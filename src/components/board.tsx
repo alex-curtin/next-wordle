@@ -1,16 +1,18 @@
 import { useStore } from "../store";
 
-const colorClasses = ["", "bg-neutral-600", "bg-yellow-500", "bg-green-600"];
+const colorClasses = ["", "gray", "yellow", "green"];
 
 const Square = ({
 	letter,
 	colorClass = "",
 }: { letter: string; colorClass: string }) => {
 	return (
-		<div
-			className={`w-14 h-14 border border-neutral-600 flex items-center justify-center font-bold text-3xl ${colorClass}`}
-		>
-			{letter?.toUpperCase()}
+		<div className="w-14 h-14 border border-neutral-600 flex items-center font-bold text-3xl square">
+			<div
+				className={`w-full h-full flex items-center justify-center flip-animation ${colorClass}`}
+			>
+				{letter?.toUpperCase()}
+			</div>
 		</div>
 	);
 };
