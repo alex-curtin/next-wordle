@@ -26,7 +26,7 @@ const Board = () => {
 				return (
 					// rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 					<div key={i} className="flex gap-1 mb-1">
-						{guess.guessData.map((ltr, i) => {
+						{guess?.guessData.map((ltr, i) => {
 							return (
 								<Square
 									letter={ltr.char}
