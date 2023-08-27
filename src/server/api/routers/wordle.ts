@@ -20,6 +20,9 @@ export const wordleRouter = createTRPCRouter({
 			if (status !== 200) {
 				return {
 					isVailidGuess: false,
+					guess,
+					isCorrect: false,
+					guessData: [],
 				};
 			}
 
