@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 import { RouterOutputs } from "~/utils/api";
 import { defaultLetterColors } from "~/constants/letters";
-typeof defaultLetterColors;
+
 type Guess = RouterOutputs["wordle"]["checkGuess"];
 
 interface Store {
